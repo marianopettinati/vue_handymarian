@@ -27,7 +27,10 @@ COSAS A VER: - Responsiveness
       <template v-slot>
         <h1>{{ selectedProduct.nombre }}</h1>
         <p>{{ selectedProduct.descripcion }}</p>
-        <img :src="selectedProduct.fotoPortada" :alt="selectedProduct.nombre" />
+        <img
+          :src="selectedProduct.fotoPortadaAlt"
+          :alt="selectedProduct.nombre"
+        />
       </template>
     </ProductDetail>
   </div>
@@ -48,16 +51,16 @@ export default {
           id: 0,
           nombre: "Perchero Ary",
           descripcion: "Perchero con estante en paraíso laqueado",
-          fotoPortada: require("../assets/percheroAryFrente.jpeg"),
-          fotoPortadaAlt: require("../assets/percheroAryIso.jpeg"),
+          fotoPortada: require("../assets/percheroAry.jpg"),
+          fotoPortadaAlt: require("../assets/percheroAryIso.jpg"),
           mouseOver: false,
         },
         {
           id: 1,
           nombre: "Velador Tangible",
           descripcion: "Velador de amurar en paraíso y cemento blanco",
-          fotoPortada: require("../assets/velador_tangible.png"),
-          fotoPortadaAlt: require("../assets/velador_tangible_perspectiva.png"),
+          fotoPortada: require("../assets/veladorTangibleAmurado.jpg"),
+          fotoPortadaAlt: require("../assets/velador_tangible.png"),
           mouseOver: false,
         },
         {
@@ -73,8 +76,16 @@ export default {
           id: 3,
           nombre: "Mesa Coqui",
           descripcion: "Mesa ratona en Guayubira y cemento blanco",
-          fotoPortada: require("../assets/mesaRatonaGuayubiraFrenteNoBG.png"),
-          fotoPortadaAlt: require("../assets/mesaRatonaGuayubiraIso.png"),
+          fotoPortada: require("../assets/mesaRatonaGuayubira.jpeg"),
+          fotoPortadaAlt: require("../assets/mesaRatonaGuayubiraFrenteNoBG.png"),
+          mouseOver: false,
+        },
+        {
+          id: 4,
+          nombre: "Banqueta Marisita",
+          descripcion: "Banqueta estilo campo en paraíso maciso",
+          fotoPortada: require("../assets/banquetaMarisita.jpg"),
+          fotoPortadaAlt: require("../assets/banquetaMarisitaFrente.jpg"),
           mouseOver: false,
         },
       ],
@@ -96,6 +107,7 @@ export default {
 <style scoped>
 .products {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   padding: 0 5%;
 }
@@ -103,11 +115,10 @@ export default {
 .product {
   position: relative;
   /* margin: 0 auto; */
-
   display: flex;
   flex-direction: column;
-  height: 400px;
-  width: 300px;
+  height: 370px;
+  width: 260px;
   padding: 15px;
   border-radius: 10px;
   text-align: center;
@@ -116,9 +127,13 @@ export default {
 
 .product img {
   position: absolute;
+  border-radius: 5px;
   left: 0;
   right: 0;
   margin: 0 auto;
+  max-height: 260px;
+  max-width: 260px;
+  object-fit: contain;
   /* -webkit-transition: opacity 0.5s ease-in-out;
   -moz-transition: opacity 0.5s ease-in-out;
   -o-transition: opacity 0.5s ease-in-out; */
@@ -133,10 +148,11 @@ export default {
   text-align: left;
   margin-top: auto;
 }
+
 img {
   margin: auto;
-  max-height: 80%;
-  max-width: 80%;
+  max-height: 70%;
+  max-width: 70%;
   object-fit: contain;
 }
 </style>

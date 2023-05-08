@@ -2,8 +2,9 @@
   <nav id="gen-nav">
     <router-link :to="{ name: 'home' }">Home</router-link>
     <router-link :to="{ name: 'about' }">About</router-link>
-    <router-link to="/colors">Color tests</router-link>
-    <router-link to="/products">Products Sample</router-link>
+    <router-link :to="{ name: 'colors' }">Color tests</router-link>
+    <router-link :to="{ name: 'products' }">Products Sample</router-link>
+    <router-link :to="{ name: 'admin' }">Admin</router-link>
   </nav>
   <router-view />
 </template>
