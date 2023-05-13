@@ -3,42 +3,22 @@
     <h1>HandyMarian</h1>
     <nav>
       <ul>
-        <li
-          @mouseenter="toggleClass"
-          @mouseleave="toggleClass"
-          :class="{ active: isActive }"
-        >
-          portfolio
-        </li>
-        <li>woodworks</li>
-        <li>welds</li>
-        <li>roughs</li>
+        <li class="category">portfolio</li>
+        <li class="category">woodworks</li>
+        <li class="category">welds</li>
+        <li class="category">roughs</li>
         <!-- esta sería la línea rústica/no refinada: cajonera fenólico Dodi -->
-        <li>upcycles</li>
-        <li>spaces</li>
-        <li>flea market</li>
+        <li class="category">upcycles</li>
+        <li class="category">spaces</li>
+        <li class="category">flea market</li>
+        <li class="category">mecenazgo</li>
+        <!-- bocetos en sketchup buscando quien los financie -->
       </ul>
     </nav>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      isActive: false,
-    };
-  },
-  methods: {
-    toggleClass() {
-      this.isActive = !this.isActive;
-    },
-    toggleProductClass() {
-      this.productIsActive = !this.productIsActive;
-    },
-  },
-};
-</script>
+<script></script>
 
 <style scoped>
 h1 {
@@ -51,7 +31,8 @@ nav {
 nav > ul {
   color: #3f4e4f;
 }
-.active {
+
+.category:hover {
   color: white;
   cursor: pointer;
   background: #40513b;
@@ -71,5 +52,6 @@ li {
   list-style-type: none;
   font-weight: bold;
   padding: 5px 15px 5px 15px;
+  margin: 0px 5px;
 }
 </style>
