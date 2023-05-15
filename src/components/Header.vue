@@ -3,22 +3,33 @@
     <h1>HandyMarian</h1>
     <nav>
       <ul>
-        <li class="category">portfolio</li>
-        <li class="category">woodworks</li>
-        <li class="category">welds</li>
-        <li class="category">roughs</li>
+        <li class="category" @click="setCategoria('portfolio')">portfolio</li>
+        <li class="category" @click="setCategoria('madera')">woodworks</li>
+        <li class="category" @click="setCategoria('hierro')">welds</li>
+        <li class="category" @click="setCategoria('recios')">roughs</li>
         <!-- esta sería la línea rústica/no refinada: cajonera fenólico Dodi -->
-        <li class="category">upcycles</li>
-        <li class="category">spaces</li>
-        <li class="category">flea market</li>
-        <li class="category">mecenazgo</li>
+        <li class="category" @click="setCategoria('upcycles')">upcycles</li>
+        <li class="category" @click="setCategoria('spaces')">spaces</li>
+        <li class="category" @click="setCategoria('flea-market')">
+          flea market
+        </li>
+        <li class="category" @click="setCategoria('mecenazgo')">mecenazgo</li>
         <!-- bocetos en sketchup buscando quien los financie -->
       </ul>
     </nav>
   </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  methods: {
+    setCategoria(categoria) {
+      this.categoria = categoria;
+      this.$emit("selectedCat", this.categoria);
+    },
+  },
+};
+</script>
 
 <style scoped>
 h1 {

@@ -17,7 +17,6 @@ export default {
   props: [""],
   methods: {
     closeModal() {
-      console.log("backdrop");
       this.$emit("close");
     },
   },

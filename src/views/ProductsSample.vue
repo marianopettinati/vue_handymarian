@@ -2,22 +2,21 @@ COSAS A VER: - Responsiveness
 
 <template>
   <div>
-    <Header />
+    <Header @selected-cat="categoryFilter" />
   </div>
   <h2>Wood</h2>
+  <p v-if="isLoading">Cargando...</p>
   <div class="products">
     <div
       class="product"
-      v-for="(product, index) in products"
-      :key="product.id"
       @click="openProductDetails(index)"
+      @category="setCategory"
+      v-for="(product, index) in filtered_products"
+      :key="product.id"
     >
+      <!-- En realidad, para que el css quede bien en lugar de usa un if en el renderizado, tendría que recorrer un array nuevo filtrado por categoria  -->
       <img class="bottom" :src="product.fotoPortadaAlt" :alt="product.name" />
       <img class="top" :src="product.fotoPortada" :alt="product.name" />
-      <!-- <img
-        :src="product.mouseOver ? product.fotoPortadaAlt : product.fotoPortada"
-        :alt="product.name"
-      /> -->
       <div class="articulo">
         <h3>{{ product.nombre }}</h3>
         <p>{{ product.descripcion }}</p>
@@ -44,6 +43,7 @@ export default {
   components: { Header, ProductDetail },
   data() {
     return {
+      isLoading: true,
       showProductDetails: false,
       selectedProduct: "",
       products: [
@@ -53,6 +53,7 @@ export default {
           descripcion: "Perchero con estante en paraíso laqueado",
           fotoPortada: require("../assets/percheroAry.jpg"),
           fotoPortadaAlt: require("../assets/percheroAryIso.jpg"),
+          categoria: "madera",
           mouseOver: false,
         },
         {
@@ -61,6 +62,7 @@ export default {
           descripcion: "Velador de amurar en paraíso y cemento blanco",
           fotoPortada: require("../assets/veladorTangibleAmurado.jpg"),
           fotoPortadaAlt: require("../assets/velador_tangible.png"),
+          categoria: "spaces",
           mouseOver: false,
         },
         {
@@ -70,6 +72,7 @@ export default {
             "Biblioteca en tres módulos en paraíso y melamina blanca, con lugar de guardado",
           fotoPortada: require("../assets/bibliotecaCatalinaSobreFondoDeHormigon.jpg"),
           fotoPortadaAlt: require("../assets/biblioCataFrente.png"),
+          categoria: "madera",
           mouseOver: false,
         },
         {
@@ -78,6 +81,7 @@ export default {
           descripcion: "Mesa ratona en Guayubira y cemento blanco",
           fotoPortada: require("../assets/mesaRatonaGuayubira.jpeg"),
           fotoPortadaAlt: require("../assets/mesaRatonaGuayubiraFrenteNoBG.png"),
+          categoria: "madera",
           mouseOver: false,
         },
         {
@@ -86,19 +90,43 @@ export default {
           descripcion: "Banqueta estilo campo en paraíso maciso",
           fotoPortada: require("../assets/banquetaMarisita.jpg"),
           fotoPortadaAlt: require("../assets/banquetaMarisitaFrente.jpg"),
+          categoria: "madera",
           mouseOver: false,
         },
       ],
+      filtered_products: this.products,
     };
   },
   methods: {
     openProductDetails(index) {
-      console.log("click", index);
       this.showProductDetails = true;
       this.selectedProduct = this.products[index];
     },
     closeProductDetails() {
       this.showProductDetails = false;
+    },
+    categoryFilter(cat) {
+      if (cat === "portfolio") {
+        this.filtered_products = this.products;
+      } else {
+        this.filtered_products = this.products.filter((item) => {
+          return item.categoria === cat;
+        });
+      }
+    },
+    // Pedido asíncrono a la DB, ahora lo hago con los prod que están aca, pero más adelante se tendría que conectar a la DB
+    onBeforeMount() {
+      this.filtered_products = this.products;
+      this.isLoading = false;
+      // try {
+      //   // const response = await fetch("https://DBURL");
+      //   // const data = await response.json();
+      //   this.filtered_products = this.products;
+      // } catch (error) {
+      //   console.error(error);
+      // } finally {
+      //   this.isLoading = false;
+      // }
     },
   },
 };
@@ -114,7 +142,7 @@ export default {
 
 .product {
   position: relative;
-  /* margin: 0 auto; */
+  margin: 1em;
   display: flex;
   flex-direction: column;
   height: 370px;
