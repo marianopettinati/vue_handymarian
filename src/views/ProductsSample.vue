@@ -4,7 +4,7 @@ COSAS A VER: - Responsiveness
   <div>
     <Header @selected-cat="categoryFilter" />
   </div>
-  <h2>Wood</h2>
+  <h2>{{ categoryActive }}</h2>
   <p v-if="isLoading">Cargando...</p>
   <div class="products">
     <div
@@ -43,9 +43,11 @@ export default {
   components: { Header, ProductDetail },
   data() {
     return {
+      categoryActive: "portfolio",
       isLoading: true,
       showProductDetails: false,
       selectedProduct: "",
+      filtered_products: [],
       products: [
         {
           id: 0,
@@ -94,8 +96,11 @@ export default {
           mouseOver: false,
         },
       ],
-      filtered_products: this.products,
     };
+  },
+  mounted() {
+    this.filtered_products = this.products;
+    this.isLoading = false;
   },
   methods: {
     openProductDetails(index) {
@@ -108,25 +113,13 @@ export default {
     categoryFilter(cat) {
       if (cat === "portfolio") {
         this.filtered_products = this.products;
+        this.categoryActive = "Portfolio";
       } else {
+        this.categoryActive = cat;
         this.filtered_products = this.products.filter((item) => {
           return item.categoria === cat;
         });
       }
-    },
-    // Pedido asíncrono a la DB, ahora lo hago con los prod que están aca, pero más adelante se tendría que conectar a la DB
-    onBeforeMount() {
-      this.filtered_products = this.products;
-      this.isLoading = false;
-      // try {
-      //   // const response = await fetch("https://DBURL");
-      //   // const data = await response.json();
-      //   this.filtered_products = this.products;
-      // } catch (error) {
-      //   console.error(error);
-      // } finally {
-      //   this.isLoading = false;
-      // }
     },
   },
 };

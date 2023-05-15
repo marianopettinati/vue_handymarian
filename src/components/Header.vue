@@ -6,7 +6,7 @@
         <li class="category" @click="setCategoria('portfolio')">portfolio</li>
         <li class="category" @click="setCategoria('madera')">woodworks</li>
         <li class="category" @click="setCategoria('hierro')">welds</li>
-        <li class="category" @click="setCategoria('recios')">roughs</li>
+        <li class="category" @click="setCategoria('robustos')">roughs</li>
         <!-- esta sería la línea rústica/no refinada: cajonera fenólico Dodi -->
         <li class="category" @click="setCategoria('upcycles')">upcycles</li>
         <li class="category" @click="setCategoria('spaces')">spaces</li>
